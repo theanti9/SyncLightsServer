@@ -42,7 +42,7 @@ namespace SyncLightsServer.Server
             {
                 BoardRegister.Register(urlParams["ip"].ToString(), int.Parse(urlParams["port"].ToString()));
             }
-            else if (action == "unregister") // if they're not registering, they're unregistring
+            else if (action == "unregister")
             {
                 BoardRegister.Unregister(urlParams["ip"].ToString(), int.Parse(urlParams["port"].ToString()));
             }

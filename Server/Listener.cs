@@ -57,18 +57,11 @@ namespace SyncLightsServer.Server
 
                 if (read > 0)
                 {
-                    string _in = Encoding.ASCII.GetString(state.buffer, 0, read);
-                    Console.WriteLine(_in);
-                    state.sb.Append(_in);
+                    state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, read));
                 }
 
                 if (state.sb.ToString().Length > 48)   // 48 is the bare minimum length for an incoming request
                 {
-                    Console.WriteLine();
-                    Console.WriteLine();
-                    Console.WriteLine(state.sb.ToString());
-                    Console.WriteLine();
-                    Console.WriteLine();
                     byte[] answer = RequestHandler.Handle(state.sb.ToString());
                     state.workSocket.BeginSend(answer, 0, answer.Length, SocketFlags.None, new AsyncCallback(Send), state);
                 }
