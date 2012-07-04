@@ -20,6 +20,11 @@ namespace SyncLightsServer.Server.State
 
         public static void Register(string host, int port)
         {
+            if (boardList.Where(b => b.IEP.Address.ToString() == host && b.IEP.Port == port).ToList().Count > 0)
+            {
+                // Board already registered
+                return;
+            }
             boardList.Add(new Board() { IEP = new IPEndPoint(IPAddress.Parse(host), port), LastContact = DateTime.Now, Ready = true });
         }
 
